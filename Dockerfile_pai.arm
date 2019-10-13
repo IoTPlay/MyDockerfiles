@@ -7,9 +7,9 @@ ARG ARCH="arm32v7/"
 ARG PAIUSR="iotp" 
 ARG PAIGP="iotpgp" 
 
-ENV PAI_BASE_DIR=/usr/local/pai
-ENV PAI_CONFIG_PATH=/etc/pai
-ENV PAI_LOGGING_PATH=/var/log/pai
+ENV PAI_BASE_DIR="code/"        # /usr/local/pai
+ENV PAI_CONFIG_PATH="etc/"      # /etc/pai
+ENV PAI_LOGGING_PATH="log/"     # /var/log/pai
 
 ENV PAI_CONFIG_FILE=${PAI_CONFIG_PATH}/pai.conf
 ENV PAI_LOGGING_FILE=${PAI_LOGGING_PATH}/paradox.log
