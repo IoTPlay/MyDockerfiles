@@ -7,12 +7,12 @@ ARG ARCH="arm32v7/"
 ARG PAIUSR="iotp" 
 ARG PAIGP="iotpgp" 
 
-ENV PAI_BASE_DIR=/opt/iotplay/pai/code        
-    # /usr/local/pai
-ENV PAI_CONFIG_PATH=/opt/iotplay/pai/etc      
-    # /etc/pai
-ENV PAI_LOGGING_PATH=/opt/iotplay/pai/log     
-    # /var/log/pai
+ENV PAI_BASE_DIR=/usr/local/pai
+    # /opt/iotplay/pai/code        
+ENV PAI_CONFIG_PATH=/etc/pai
+    #/opt/iotplay/pai/etc      
+ENV PAI_LOGGING_PATH=/var/log/pai
+    #/opt/iotplay/pai/log     
 
 ENV PAI_CONFIG_FILE=${PAI_CONFIG_PATH}/pai.conf
 ENV PAI_LOGGING_FILE=${PAI_LOGGING_PATH}/paradox.log
@@ -22,10 +22,10 @@ RUN mkdir -p ${PAI_CONFIG_PATH} ${PAI_BASE_DIR} ${PAI_LOGGING_PATH}
     # add user paradox to image
 RUN    addgroup ${PAIGP} && adduser -S ${PAIUSR} -G ${PAIGP}
 
-ADD  paradox           ${PAI_BASE_DIR}/paradox           
-ADD  requirements.txt  ${PAI_BASE_DIR}/requirements.txt  
-ADD  run.py            ${PAI_BASE_DIR}/run.py            
-ADD  config/pai.conf   ${PAI_CONFIG_PATH}/pai.conf
+ADD  paradox ${PAI_BASE_DIR}/paradox           
+ADD  requirements.txt ${PAI_BASE_DIR}/requirements.txt  
+ADD  run.py ${PAI_BASE_DIR}/run.py            
+ADD  config/pai.conf ${PAI_CONFIG_PATH}/pai.conf
 
 RUN chown -R pai ${PAI_BASE_DIR} ${PAI_LOGGING_PATH} ${PAI_CONFIG_PATH}  && \
     pip install --no-cache-dir -r requirements.txt
