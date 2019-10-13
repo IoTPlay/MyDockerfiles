@@ -1,10 +1,11 @@
 # Adapted from https://github.com/ParadoxAlarmInterface/pai 
 
-ARG ARCH="" 
-ARG PAIUSR="iotp" 
-ARG PAIGP="iotpgp" # RPI ARCH="arm32v7/"
-
 FROM ${ARCH}python:3.6-alpine3.10
+
+ARG ARCH="arm32v7/" 
+    # RPI ARCH="arm32v7/"
+ARG PAIUSR="iotp" 
+ARG PAIGP="iotpgp" 
 
 ENV PAI_BASE_DIR=/usr/local/pai
 ENV PAI_CONFIG_PATH=/etc/pai
