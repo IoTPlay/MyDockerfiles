@@ -1,6 +1,8 @@
 # Adapted from https://github.com/ParadoxAlarmInterface/pai 
 
-ARG ARCH="" PAIUSR="" PAIGP="" # RPI ARCH="arm32v7/"
+ARG ARCH="" 
+ARG PAIUSR="iotp" 
+ARG PAIGP="iotpgp" # RPI ARCH="arm32v7/"
 
 FROM ${ARCH}python:3.6-alpine3.10
 
