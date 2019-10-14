@@ -22,7 +22,7 @@ RUN chown -R pai:pai ${PAI_BASE_DIR} ${PAI_LOGGING_PATH} ${PAI_CONFIG_PATH}
 ADD --chown=pai paradox ${PAI_BASE_DIR}/paradox
 ADD --chown=pai requirements.txt ${PAI_BASE_DIR}/requirements.txt
 ADD --chown=pai run.py ${PAI_BASE_DIR}/run.py
-ADD --chown=pai config/pai.conf.example ${PAI_CONFIG_PATH}/pai.conf
+ADD --chown=pai config/pai.conf ${PAI_CONFIG_PATH}/pai.conf
 
 # OR
 #RUN wget -c https://github.com/jpbarraca/pai/archive/master.tar.gz -O - | tar -xz --strip 1
