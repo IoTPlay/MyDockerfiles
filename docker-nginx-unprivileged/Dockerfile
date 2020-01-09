@@ -1,7 +1,7 @@
 ARG IMAGE=debian:buster-slim
 FROM $IMAGE
 
-LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
+LABEL maintainer="J Roux <jean@iotplay.org>"
 
 ENV NGINX_VERSION   1.17.6
 ENV NJS_VERSION     0.3.7
