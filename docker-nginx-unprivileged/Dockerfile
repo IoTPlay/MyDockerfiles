@@ -1,3 +1,4 @@
+# JR - the problem is that /etc/nginx/conf.d is still created with root:root user, and thus the volumes to host does not work.
 ARG IMAGE=debian:buster-slim
 FROM $IMAGE
 
