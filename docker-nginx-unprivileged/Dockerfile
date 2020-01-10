@@ -6,9 +6,9 @@ LABEL maintainer="J Roux <jean@iotplay.org>"
 ENV NGINX_VERSION   1.17.6
 ENV NJS_VERSION     0.3.7
 ENV PKG_RELEASE     1~buster
-ENV GID             1010 
+ENV GID             175 
 # was 101
-ENV UID             10100
+ENV UID             175
 #was 101
 
 RUN set -x \
@@ -103,16 +103,13 @@ RUN sed -i -e '/listen/!b' -e '/80;/!b' -e 's/80;/8080;/' /etc/nginx/conf.d/defa
     && sed -i 's!/var/run/nginx.pid!/tmp/nginx.pid!g' /etc/nginx/nginx.conf \
     && sed -i "/^http {/a \    proxy_temp_path /tmp/proxy_temp;\n    client_body_temp_path /tmp/client_temp;\n    fastcgi_temp_path /tmp/fastcgi_temp;\n    uwsgi_temp_path /tmp/uwsgi_temp;\n    scgi_temp_path /tmp/scgi_temp;\n" /etc/nginx/nginx.conf
 
-# add the nginx user to the root group
-RUN adduser ${UID} root \
-    && chown -R ${UID}:${GID} /etc/nginx
-
 # nginx user must own the cache directory to write cache
 RUN chown -R ${UID}:${GID} /var/cache/nginx \
     && chmod -R g+w /var/cache/nginx
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && chown -R ${UID}:${GID} /etc/nginx \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
 EXPOSE 8080
