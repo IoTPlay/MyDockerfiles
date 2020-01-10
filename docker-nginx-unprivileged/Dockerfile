@@ -15,7 +15,8 @@ RUN set -x \
 # create nginx user/group first, to be consistent throughout docker variants
     && addgroup --system --gid ${GID} nginx \
     && adduser --system --disabled-login --ingroup nginx --no-create-home --home /nonexistent --gecos "nginx user" --shell /bin/false --uid ${UID} nginx \
-    && adduser ${UID} ${GID} \
+    # add the nginx user to the root group
+    && adduser ${UID} root \ 
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y gnupg1 ca-certificates \
     && \
@@ -106,6 +107,7 @@ RUN sed -i -e '/listen/!b' -e '/80;/!b' -e 's/80;/8080;/' /etc/nginx/conf.d/defa
 
 # nginx user must own the cache directory to write cache
 RUN chown -R ${UID}:${GID} /var/cache/nginx \
+    && chown -R ${UID}:${GID} /etc/nginx \
     && chmod -R g+w /var/cache/nginx
 
 # forward request and error logs to docker log collector
